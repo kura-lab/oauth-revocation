@@ -85,7 +85,7 @@
       </address>
     </author>
 
-    <date day="13" month="July" year="2013"/>
+    <date month="August" year="2013"/>
 
     <!-- Meta-data Declarations -->
 
@@ -115,17 +115,10 @@
       <t>This document proposes an additional endpoint for OAuth authorization
       servers, which allows clients to notify the authorization server that a
       previously obtained refresh or access token is no longer needed. This
-      allows the authorization server to cleanup security credentials. A
+      allows the authorization server to clean up security credentials. A
       revocation request will invalidate the actual token and, if applicable,
       other tokens based on the same authorization grant.</t>
     </abstract>
-
-    <note title="Requirements Language">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-      document are to be interpreted as described in <xref
-      target="RFC2119">RFC 2119</xref>.</t>
-    </note>
   </front>
 
   <middle>
@@ -144,14 +137,21 @@
       to invalidate its tokens if the end-user logs out, changes identity, or
       uninstalls the respective application. Notifying the authorization
       server that the token is no longer needed allows the authorization
-      server to clean up data associated with that token (e.g. session data)
+      server to clean up data associated with that token (e.g., session data)
       and the underlying authorization grant. This behavior prevents a
-      situation where there is still a valid authorization grant for a
-      particular client which the end user is not aware of. This way, token
+      situation in which there is still a valid authorization grant for a
+      particular client of which the end-user is not aware. This way, token
       revocation prevents abuse of abandoned tokens and facilitates a better
       end-user experience since invalidated authorization grants will no
       longer turn up in a list of authorization grants the authorization
       server might present to the end-user.</t>
+    </section>
+
+    <section title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.</t>
     </section>
 
     <section anchor="Revocation" title="Token Revocation">
@@ -161,11 +161,11 @@
 
       <t>The client requests the revocation of a particular token by making an
       HTTP POST request to the token revocation endpoint URL. This URL MUST
-      conform to the rules given in <xref target="RFC6749"/>, section 3.1.
+      conform to the rules given in <xref target="RFC6749"/>, Section 3.1.
       Clients MUST verify that the URL is an HTTPS URL.</t>
 
       <t>The means to obtain the location of the revocation endpoint is out of
-      scope of this specification. For example, the client developer may
+      the scope of this specification. For example, the client developer may
       consult the server's documentation or automatic discovery may be used.
       As this endpoint is handling security credentials, the endpoint location
       needs to be obtained from a trustworthy source.</t>
@@ -174,13 +174,13 @@
       transmission of plain text credentials in the HTTP request, URLs for
       token revocation endpoints MUST be HTTPS URLs. The authorization server
       MUST use Transport Layer Security (TLS) in a version compliant with
-      <xref target="RFC6749"/>, section 1.6. Implementations MAY also support
+      <xref target="RFC6749"/>, Section 1.6. Implementations MAY also support
       additional transport-layer security mechanisms that meet their security
       requirements.</t>
 
       <t>If the host of the token revocation endpoint can also be reached over
       HTTP, then the server SHOULD also offer a revocation service at the
-      corresponding HTTP URI, but MUST NOT publish this URI as a token
+      corresponding HTTP URI, but it MUST NOT publish this URI as a token
       revocation endpoint. This ensures that tokens accidentally sent over
       HTTP will be revoked.</t>
 
@@ -197,16 +197,16 @@
             the token submitted for revocation. Clients MAY pass this
             parameter in order to help the authorization server to optimize
             the token lookup. If the server is unable to locate the token
-            using the given hint, it MUST extend its search accross all of its
+            using the given hint, it MUST extend its search across all of its
             supported token types. An authorization server MAY ignore this
             parameter, particularly if it is able to detect the token type
             automatically. This specification defines two such values:<list
                 style="symbols">
-                <t>access_token: An Access Token as defined in <xref
-                target="RFC6749"/>, section 1.4</t>
+                <t>access_token: An access token as defined in <xref
+                target="RFC6749"/>, Section 1.4</t>
 
-                <t>refresh_token: A Refresh Token as defined in <xref
-                target="RFC6749"/>, section 1.5</t>
+                <t>refresh_token: A refresh token as defined in <xref
+                target="RFC6749"/>, Section 1.5</t>
               </list>Specific implementations, profiles, and extensions of
             this specification MAY define other values for this parameter
             using the registry defined in <xref target="hint-reg"/>.</t>
@@ -236,7 +236,7 @@
 
         <t>In the next step, the authorization server invalidates the token.
         The invalidation takes place immediately, and the token can not be
-        used again after the revocation. In practice there could be a
+        used again after the revocation. In practice, there could be a
         propagation delay, for example, in which some servers know about the
         invalidation while others do not. Implementations should minimize that
         window, and clients must not try to use the token after receipt of an
@@ -255,7 +255,7 @@
         <t>Note: A client compliant with <xref target="RFC6749"/> must be
         prepared to handle unexpected token invalidation at any time.
         Independent of the revocation mechanism specified in this document,
-        resource owners may revoke authorization grants or the authorization
+        resource owners may revoke authorization grants, or the authorization
         server may invalidate tokens in order to mitigate security threats.
         Thus having different server policies with respect to cascading the
         revocation of tokens should not pose interoperability problems.</t>
@@ -263,7 +263,7 @@
 
       <section title="Revocation Response">
         <t>The authorization server responds with HTTP status code 200 if the
-        token has been revoked sucessfully or if the client submitted an
+        token has been revoked successfully or if the client submitted an
         invalid token.</t>
 
         <t>Note: invalid tokens do not cause an error response since the
@@ -278,13 +278,13 @@
         server and does not influence the revocation response.</t>
 
         <section title="Error Response">
-          <t>The error presentation conforms to the definition in section 5.2
+          <t>The error presentation conforms to the definition in Section 5.2
           of <xref target="RFC6749"/>. The following additional error code is
           defined for the token revocation endpoint: <list hangIndent="8"
               style="hanging">
-              <t hangText="unsupported_token_type">The authorization server
+              <t hangText="unsupported_token_type">: The authorization server
               does not support the revocation of the presented token type.
-              I.e. the client tried to revoke an access token on a server not
+              That is, the client tried to revoke an access token on a server not
               supporting this feature.</t>
             </list></t>
 
@@ -297,8 +297,8 @@
       </section>
 
       <section anchor="cross-orgin" title="Cross-Origin Support">
-        <t>The revocation end-point MAY support <xref format="title"
-        target="W3C.WD-cors-20120403">CORS</xref> if it is aimed at use in
+        <t>The revocation endpoint MAY support <xref format="title"
+        target="W3C.WD-cors-20120403">Cross-Origin Resource Sharing(CORS)</xref> if it is aimed at use in
         combination with user-agent-based applications.</t>
 
         <t>In addition, for interoperability with legacy user-agents, it MAY
@@ -337,14 +337,14 @@
         </figure>
 
         <t>Clients should be aware that when relying on JSONP, a malicious
-        revocation end-point may attempt to inject malicious code into the
+        revocation endpoint may attempt to inject malicious code into the
         client.</t>
       </section>
     </section>
 
     <section anchor="impl" title="Implementation Note">
       <t>OAuth 2.0 allows deployment flexibility with respect to the style of
-      access tokens. The access tokens may be self-contained so that an
+      access tokens. The access tokens may be self-contained so that a
       resource server needs no further interaction with an authorization
       server issuing these tokens to perform an authorization decision of the
       client requesting access to a protected resource. A system design may,
@@ -354,16 +354,16 @@
       authorization server to retrieve the content of the access token every
       time a client presents an access token.</t>
 
-      <t>While these are not the only options they illustrate the implications
-      for revocation. In the latter case the authorization server is able to
+      <t>While these are not the only option, they illustrate the implications
+      for revocation. In the latter case, the authorization server is able to
       revoke an access token previously issued to a client when the resource
-      server relays a received access token. In the former case some
+      server relays a received access token. In the former case, some
       (currently non-standardized) backend interaction between the
       authorization server and the resource server may be used when immediate
       access token revocation is desired. Another design alternative is to
       issue short-lived access tokens, which can be refreshed at any time
       using the corresponding refresh tokens. This allows the authorization
-      server to impose a limit on the time revoked access tokens are in
+      server to impose a limit on the time revoked when access tokens are in
       use.</t>
 
       <t>Which approach of token revocation is chosen will depend on the
@@ -374,40 +374,40 @@
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
-      <t>This specification registers an error value in the OAuth Extension
-      Error registry and establishes the OAuth Token Type registry.</t>
+      <t>This specification registers an error value in the "OAuth Extensions
+      Error Registry" and establishes the "OAuth Token Type Hints registry.</t>
 
       <section title="OAuth Extensions Error Registration">
-        <t>This specification registers the following error values in the
-        OAuth Extensions Error registry defined in <xref
+        <t>This specification registers the following error value in the
+        "OAuth Extensions Error Registry" defined in <xref
         target="RFC6749"/>.</t>
 
         <section title="The &quot;unsupported_token_type&quot; Error Value">
           <t><list hangIndent="8" style="hanging">
-              <t hangText="Error name">unsupported_token_type</t>
+              <t hangText="Error name">: unsupported_token_type</t>
 
-              <t hangText="Error usage location">revocation endpoint error
+              <t hangText="Error Usage Location">: Revocation endpoint error
               response</t>
 
-              <t hangText="Related protocol extension">Token Revocation
+              <t hangText="Related Protocol Extension">: Token Revocation
               Endpoint</t>
 
-              <t hangText="Change controller">IETF</t>
+              <t hangText="Change controller">: IETF</t>
 
-              <t hangText="Specification document(s)">[this document]</t>
+              <t hangText="Specification document(s)">[RFC7009]</t>
             </list></t>
         </section>
 
         <section anchor="hint-reg" title="OAuth Token Type Hint Registry">
-          <t>This specification establishes the OAuth Token Type Hint
+          <t>This specification establishes the "OAuth Token Type Hints"
           registry. Possible values of the parameter "token_type_hint" (see
           Section 2.1) are registered with a Specification Required (<xref
           target="RFC5226"/>) after a two-week review period on the
-          TBD@ietf.org mailing list, on the advice of one or more Designated
+          oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated
           Experts. However, to allow for the allocation of values prior to
           publication, the Designated Expert(s) may approve registration once
           they are satisfied that such a specification will be published.
-          Registration requests must be sent to the TBD@ietf.org mailing list
+          Registration requests must be sent to the oauth-ext-review@ietf.org mailing list
           for review and comment, with an appropriate subject (e.g., "Request
           for parameter: example"). Within the review period, the Designated
           Expert(s) will either approve or deny the registration request,
@@ -426,10 +426,10 @@
                 <t hangText="Change controller:">For Standards Track RFCs,
                 state "IETF". For others, give the name of the responsible
                 party. Other details (e.g., postal address, email address,
-                home page URI) may also be included.</t>
+                and home page URI) may also be included.</t>
 
                 <t hangText="Specification document(s):">Reference to the
-                document(s) that specify the type, preferably including a URI
+                document(s) that specifies the type, preferably including a URI
                 that can be used to retrieve a copy of the document(s). An
                 indication of the relevant sections may also be included but
                 is not required.</t>
@@ -437,21 +437,17 @@
           </section>
 
           <section title="Initial Registry Contents">
-            <t>The OAuth Token Type Hint registry's initial contents are:</t>
+            <t>The OAuth Token Type Hint registry's initial contents are as follows.</t>
 
-            <t><list style="symbols">
-                <t>Hint Value: access_token</t>
+             +---------------+-------------------+-----------+
+             |   Hint Value  | Change Controller | Reference |
+             +---------------+-------------------+-----------+
+             |  access_token |        IETF       | [RFC7009] |
+             | refresh_token |        IETF       | [RFC7009] |
+             +---------------+-------------------+-----------+
 
-                <t>Change controller: IETF</t>
+            <t>Table 1: OAuth Token Type Hints initial registry contents</t>
 
-                <t>Specification document(s): [this document]</t>
-
-                <t>Hint Value: refresh_token</t>
-
-                <t>Change controller: IETF</t>
-
-                <t>Specification document(s): [this document]</t>
-              </list></t>
           </section>
         </section>
       </section>
@@ -468,18 +464,18 @@
       tokens. This specification in general does not intend to provide
       countermeasures against token theft and abuse. For a discussion of
       respective threats and countermeasures, consult the security
-      considerations given in section 10 of the OAuth core specification <xref
+      considerations given in Section 10 of the OAuth core specification <xref
       target="RFC6749"/> and the OAuth threat model document <xref
       target="RFC6819"/>.</t>
 
       <t>Malicious clients could attempt to use the new endpoint to launch
-      denial of service attacks on the authorization server. Appropriate
+      denial-of-service attacks on the authorization server. Appropriate
       countermeasures, which should be in place for the token endpoint as
       well, MUST be applied to the revocation endpoint (see <xref
-      target="RFC6819"/>, section 4.4.1.11). Specifically, invalid token type
+      target="RFC6819"/>, Section 4.4.1.11). Specifically, invalid token type
       hints may misguide the authorization server and cause additional
       database lookups. Care MUST be taken to prevent malicious clients from
-      exploiting this feature to launch denial of service attacks.</t>
+      exploiting this feature to launch denial-of-service attacks.</t>
 
       <t>A malicious client may attempt to guess valid tokens on this endpoint
       by making revocation requests against potential token strings. According
@@ -497,9 +493,9 @@
       <t>Since the revocation endpoint is handling security credentials,
       clients need to obtain its location from a trustworthy source only.
       Otherwise, an attacker could capture valid security tokens by utilizing
-      a counterfeit revocation endpoint. Moreover in order to detect
+      a counterfeit revocation endpoint. Moreover, in order to detect
       counterfeit revocation endpoints, clients MUST authenticate the
-      revocation endpoint (certificate validation etc.).</t>
+      revocation endpoint (certificate validation, etc.).</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
@@ -516,8 +512,6 @@
   <back>
     <references title="Normative References">
       <?rfc include='http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
-
-      <?rfc include='http://xml.resource.org/public/rfc/bibxml/reference.RFC.2246.xml' ?>
 
       <?rfc include='http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml' ?>
 
