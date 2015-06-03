@@ -112,17 +112,32 @@
 		-->
 
     <abstract>
+      <!--
       <t>This document proposes an additional endpoint for OAuth authorization
       servers, which allows clients to notify the authorization server that a
       previously obtained refresh or access token is no longer needed. This
       allows the authorization server to clean up security credentials. A
       revocation request will invalidate the actual token and, if applicable,
       other tokens based on the same authorization grant.</t>
+      -->
+      <t>
+        このドキュメントは、OAuth 認可サーバのための追加エンドポイントを提案する。
+        そのエンドポイントは事前に取得されているリフレッシュトークンあるいは
+        アクセストークンが不要になったことを認可サーバへ通知することを
+        クライアントに許可する。
+        これは認可サーバにセキュリティクレデンシャルを削除させる。
+        撤回リクエストは実際のトークンと、もし該当するものがあれば同じ認可に基づく
+        他のトークンを無効にする。
+      </t>
     </abstract>
   </front>
 
   <middle>
+    <!--
     <section anchor="Introduction" title="Introduction">
+    -->
+    <section anchor="Introduction" title="はじめに">
+      <!--
       <t>The OAuth 2.0 core specification <xref target="RFC6749"/> defines
       several ways for a client to obtain refresh and access tokens. This
       specification supplements the core specification with a mechanism to
@@ -131,7 +146,18 @@
       revocation request will invalidate the actual token and, if applicable,
       other tokens based on the same authorization grant and the authorization
       grant itself.</t>
+      -->
+      <t>
+        OAuth 2.0 core specification <xref target="RFC6749"/> は
+        クライアントがリフレッシュトークンとアクセストークンを取得するために
+        いくつかの方法が定義している。
+        この仕様書は両タイプのトークンを取り消すための仕組みによって core specification を補足する。
+        トークンはリソースオーナーによってクライアントに発行された認可を表している文字列である。
+        撤回リクエストは、実際のトークンと、もし該当するものがあれば同じ認可に基づく
+        その他のトークンとその認可自体を無効にする。
+      </t>
 
+      <!--
       <t>From an end-user's perspective, OAuth is often used to log into a
       certain site or application. This revocation mechanism allows a client
       to invalidate its tokens if the end-user logs out, changes identity, or
@@ -145,13 +171,37 @@
       end-user experience since invalidated authorization grants will no
       longer turn up in a list of authorization grants the authorization
       server might present to the end-user.</t>
+      -->
+      <t>
+        エンドユーザの視点から、OAuth はしばしばあるサイトやアプリケーションへのログインの
+        ために用いられる。この撤回の仕組みは、エンドユーザがログアウト、アイデンティティの
+        切り替え、あるいは各アプリケーションがアンインストールされた場合に、クライアントに
+        そのトークンを無効にさせる。トークンが不要になったという認可サーバへの通知は、
+        認可サーバにトークン（例えば、セッションデータ）と認可に関連したデータを取り消させる。
+        この振る舞いは、エンドユーザが気づいていない特定のクライアントのまだ有効な認可が
+        あるという状況を防ぐ。この方法で、トークンの撤回は放棄されているトークンの乱用を防ぎ、
+        認可サーバがエンドユーザに送ったかもしれない認可の一覧で、無効になった認可を
+        みつける必要がないので、より良いエンドユーザの体験を促進する。
+      </t>
     </section>
 
+    <!--
     <section title="Requirements Language">
+    -->
+    <section title="表記規約">
+      <!--
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
       "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
       document are to be interpreted as described in <xref
       target="RFC2119">RFC 2119</xref>.</t>
+      -->
+      <t>
+        このドキュメントで用いられているキーワード「MUST（しなければならない）」、「MUST NOT（してはいけない）」、
+        「REQUIRED（必須である）」、「SHALL（するものとする）」、「SHALL NOT（しないものとする）」、
+        「SHOULD（すべきである）」、「SHOULD NOT（すべきではない）」、「RECOMMENDED（推奨される）」、
+        「MAY（してもよい）」、「OPTIONAL（任意である）」は <xref target="RFC2119">RFC 2119</xref> に
+        述べられている通りに解釈する。
+      </t>
     </section>
 
     <section anchor="Revocation" title="Token Revocation">
