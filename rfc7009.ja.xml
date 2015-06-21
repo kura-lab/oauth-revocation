@@ -252,14 +252,24 @@
       </t>
 
       <section title="Revocation Request">
+        <!--
         <t>The client constructs the request by including the following
         parameters using the "application/x-www-form-urlencoded" format in the
         HTTP request entity-body:</t>
+        -->
+        <t>
+          クライアントは HTTP リクエストエンティティボディに "application/x-www-form-urlencoded" 形式を使った以下のパラメータを含んでいるリクエストを構成する：
+        </t>
 
         <t><list hangIndent="8" style="hanging">
+            <!--
             <t hangText="token">REQUIRED. The token that the client wants to
             get revoked.</t>
+            -->
+            <t hangText="token">必須（REQUIRED）。クライアントが無効化したいトークン。
+            </t>
 
+            <!--
             <t hangText="token_type_hint">OPTIONAL. A hint about the type of
             the token submitted for revocation. Clients MAY pass this
             parameter in order to help the authorization server to optimize
@@ -278,12 +288,36 @@
             this specification MAY define other values for this parameter
             using the registry defined in <xref target="hint-reg"/>.</t>
           </list></t>
+            -->
+            <t hangText="token_type_hint">任意である（OPTIONAL）。無効化のために送信されるトークンのタイプについてのヒント。
+              クライアントは認可サーバがトークンを効率的に発見するための補助としてこのパラメータを送ってもよい（MAY）。
+              サーバが与えられたヒントを使っているトークンが特定できない場合、サポートしているトークンタイプ全てにおける検索を施さなければならない（MUST）。
+              認可サーバが自動的にトークンタイプをみつけることができるならば、このパラメータを無視してもよい（MAY）。
+              この仕様は2つの値を定義している：
+              <list style="symbols">
+                <t>access_token： Section 1.4 の <xref target="RFC6749"/> にアクセストークンとして定義されている。
+                </t>
+                <t>refresh_token： Section 1.5 の <xref target="RFC6749"/> にリフレッシュトークンとして定義されている。
+                </t>
+              </list>
+              特定の実装、プロファイル、この仕様の拡張機能は <xref target="hint-reg"/> で定義されているレジストリを利用してこのパラメータの他の値を定義してもよい（MAY）。
+            </t>
 
+        <!--
         <t>The client also includes its authentication credentials as
         described in Section 2.3. of <xref target="RFC6749"/>.</t>
+        -->
+        <t>
+          クライアントは <xref target="RFC6749"/> の Section 2.3 に説明されている認証クレデンシャルも含んでもよい。
+        </t>
 
+        <!--
         <t>For example, a client may request the revocation of a refresh token
         with the following request:</t>
+        -->
+        <t>
+          例えば、クライアントは以下のようなリクエストでリフレッシュトークンの無効化を要求してもよい。
+        </t>
 
         <figure>
           <artwork><![CDATA[
