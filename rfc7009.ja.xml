@@ -191,21 +191,40 @@
     </section>
 
     <section anchor="Revocation" title="Token Revocation">
+      <!--
       <t>Implementations MUST support the revocation of refresh tokens and
       SHOULD support the revocation of access tokens (see <xref format="title"
       target="impl"/>).</t>
+      -->
+      <t>
+        実装はリフレッシュトークンの無効化はサポートしなければならなく（MUST）、アクセストークンの無効化はサポートすべきである（SHOULD）(<xref format="title" target="impl"/> を参照)。</t>
+      </t>
 
+      <!--
       <t>The client requests the revocation of a particular token by making an
       HTTP POST request to the token revocation endpoint URL. This URL MUST
       conform to the rules given in <xref target="RFC6749"/>, Section 3.1.
       Clients MUST verify that the URL is an HTTPS URL.</t>
+      -->
+      <t>
+        クライアントは、トークン無効化エンドポイント URL に HTTP POST リクエストすることによって特定のトークンを取り消しを要請する。
+        この URL は Section 3.1 <xref target="RFC6749"/> に与えられた規則に従わなければならない（SHOULD）。クライアントは HTTPS URL がその URL であることを検証しなければならない（MUST）。
+      </t>
 
+      <!--
       <t>The means to obtain the location of the revocation endpoint is out of
       the scope of this specification. For example, the client developer may
       consult the server's documentation or automatic discovery may be used.
       As this endpoint is handling security credentials, the endpoint location
       needs to be obtained from a trustworthy source.</t>
+      -->
+      <t>
+        無効化エンドポイントの場所を得るための方法はこの仕様書の範囲外である。
+        例えば、クライアント開発者はサーバのドキュメントを調べてもよく、もしくは自動検出を使ってもよい。
+        このエンドポイントはセキュリティクレデンシャルを取り扱っている際には、エンドポイントの場所は信頼できる資料から得られる必要がある。
+      </t>
 
+      <!--
       <t>Since requests to the token revocation endpoint result in the
       transmission of plain text credentials in the HTTP request, URLs for
       token revocation endpoints MUST be HTTPS URLs. The authorization server
@@ -213,12 +232,24 @@
       <xref target="RFC6749"/>, Section 1.6. Implementations MAY also support
       additional transport-layer security mechanisms that meet their security
       requirements.</t>
+      -->
+      <t>
+        トークン無効化エンドポイントへのリクエストは、HTTP リクエスト中に平文クレデンシャルの伝達を生じるため、トークン無効化エンドポイントのための URL は HTTPS でなければならない（MUST）。
+        認可サーバは、Section 1.6 <xref target="RFC6749"/> のバージョンに準拠した Transport Layer Security（TLS）を利用しなければならない（MUST）。
+        実装のセキュリティ要求に合った追加の transport-layer security 機構もサポートしてもよい（MAY）。
+      </t>
 
+      <!--
       <t>If the host of the token revocation endpoint can also be reached over
       HTTP, then the server SHOULD also offer a revocation service at the
       corresponding HTTP URI, but it MUST NOT publish this URI as a token
       revocation endpoint. This ensures that tokens accidentally sent over
       HTTP will be revoked.</t>
+      -->
+      <t>
+        トークン無効化エンドポイントのホストも HTTP 経由で到達可能ならば、そのときそのサーバは対応する HTTP URI で無効化サービスも提供すべきである（SHOULD）が、トークン無効化エンドポイントとしてこの URI を発行してはいけない（MUST NOT）。
+        これは HTTP 経由で偶然に送信されるトークンが無効化されることを保証する。
+      </t>
 
       <section title="Revocation Request">
         <t>The client constructs the request by including the following
