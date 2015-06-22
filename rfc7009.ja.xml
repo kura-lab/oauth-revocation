@@ -329,12 +329,19 @@
   token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token]]></artwork>
         </figure>
 
+        <!--
         <t>The authorization server first validates the client credentials (in
         case of a confidential client) and then verifies whether the token was
         issued to the client making the revocation request. If this validation
         fails, the request is refused and the client is informed of the error
         by the authorization server as described below.</t>
+        -->
+        <t>
+          認可サーバは始めに（非公開なクライアントの場合）クライアントクレデンシャルの有効性を確認してから無効化を要求したクライアントに発行されたトークンかどうかを検証する。
+          この有効性の確認に失敗した場合、そのリクエストは拒否され、そのクライアントは後述の認可サーバによってエラーが通知される。
+        </t>
 
+        <!--
         <t>In the next step, the authorization server invalidates the token.
         The invalidation takes place immediately, and the token can not be
         used again after the revocation. In practice, there could be a
@@ -342,7 +349,14 @@
         invalidation while others do not. Implementations should minimize that
         window, and clients must not try to use the token after receipt of an
         HTTP 200 response from the server.</t>
+        -->
+        <t>
+          次に、認可サーバはそのトークを無効にする。その無効はただちにおこなわれ、そのトークンは無効化後は再び利用できなくなる。
+          実際には、例えば、数台のサーバがその無効化について認知しているが、他のサーバが認知してない間、実際には通信遅延してもよい。
+          実装者は受け口を最小限にすべきであり、クライアントはサーバから HTTP 200 レスポンスの受信後にトークンを利用しようとしてはいけない。
+        </t>
 
+        <!--
         <t>Depending on the authorization server's revocation policy, the
         revocation of a particular token may cause the revocation of related
         tokens and the underlying authorization grant. If the particular token
@@ -352,7 +366,14 @@
         (see <xref format="title" target="impl"/>). If the token passed to the
         request is an access token, the server MAY revoke the respective
         refresh token as well.</t>
+        -->
+        <t>
+          認可サーバの無効化ポリシーによって、特定のトークンの無効化は関連したトークンとその元となる認可の無効化を行ってもよい。
+          特定のトークンがリフレッシュトークンで認可サーバがアクセストークンの無効化をサポートする場合には、認可サーバはその同じ認可のもととなる全てのアクセストークンを無効にすべきでる（SHOULD）（ <xref format="title" target="impl"/> を参照）。
+          要求を満たしたトークンがアクセストークンであった場合には、サーバは同様に各リフレッシュトークンを無効化してもよい（MAY）。
+        </t>
 
+        <!--
         <t>Note: A client compliant with <xref target="RFC6749"/> must be
         prepared to handle unexpected token invalidation at any time.
         Independent of the revocation mechanism specified in this document,
@@ -360,6 +381,12 @@
         server may invalidate tokens in order to mitigate security threats.
         Thus having different server policies with respect to cascading the
         revocation of tokens should not pose interoperability problems.</t>
+        -->
+        <t>
+          参考：<xref target="RFC6749"/> に遵守したクライアントは随時予期せぬトークンの無効化を扱うための準備をしなければならない。
+          このドキュメントに明記されている無効化の仕組みは独立しており、リソースオーナーは認可を無効化してもよく、あるいは認可サーバはセキュリティ上の脅威を軽減するためにトークンを無効にしてもよい。
+          このようなトークンの無効化を段階的に行うことに関して異なるサーバポリシーを持つことは相互運用性の問題を引き起こすべきではない。
+        </t>
       </section>
 
       <section title="Revocation Response">
