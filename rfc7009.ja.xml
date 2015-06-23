@@ -390,20 +390,41 @@
       </section>
 
       <section title="Revocation Response">
+        <!--
         <t>The authorization server responds with HTTP status code 200 if the
         token has been revoked successfully or if the client submitted an
         invalid token.</t>
+        -->
+        <t>
+          トークンが正常に無効化されるもしくはクライアントが無効なトークンを送信した場合、認可サーバは HTTP ステータスコード 200 を返却する。
+        </t>
 
+        <!--
         <t>Note: invalid tokens do not cause an error response since the
         client cannot handle such an error in a reasonable way. Moreover, the
         purpose of the revocation request, invalidating the particular token,
         is already achieved.</t>
+        -->
+        <t>
+          参考：クライアントが適切な方法でエラーを扱うことができない間は、無効なトークンはエラーレスポンスを引き起こしてはいけない。
+          さらに、無効化リクエストの目的は、特定のトークンを無効にしているときに、すで完了している。
+        </t>
 
+        <!--
         <t>The content of the response body is ignored by the client as all
         necessary information is conveyed in the response code.</t>
+        -->
+        <t>
+          レスポンスボディの内容は、レスポンスコード中の伝達される全ての必要な情報としてクライアントによって無視される。
+        </t>
 
+        <!--
         <t>An invalid token type hint value is ignored by the authorization
         server and does not influence the revocation response.</t>
+        -->
+        <t>
+          無効なトークンタイプのヒントの値は認可サーバによって無視され、無効化レポンスに影響してはいけない。
+        </t>
 
         <section title="Error Response">
           <t>The error presentation conforms to the definition in Section 5.2
