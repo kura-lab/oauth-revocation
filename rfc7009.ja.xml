@@ -427,6 +427,7 @@
         </t>
 
         <section title="Error Response">
+          <!--
           <t>The error presentation conforms to the definition in Section 5.2
           of <xref target="RFC6749"/>. The following additional error code is
           defined for the token revocation endpoint: <list hangIndent="8"
@@ -436,12 +437,28 @@
               That is, the client tried to revoke an access token on a server not
               supporting this feature.</t>
             </list></t>
+          -->
+          <t>
+            エラーの説明は <xref target="RFC6749"/> の Section 5.2 の定義に従う。
+            以下の追加エラーコードはトークン無効化エンドポイントのために定義されている。
+            <list hangIndent="8" style="hanging">
+               <t hangText="unsupported_token_type">: 認可サーバは提示されたトークンタイプの無効化はサポートしてはいけない。
+                 つまり、クライアントはこの機能をサポートしていないサーバ上でアクセストークンの無効化を試したということである。
+               </t>
+             </list>
+          </t>
 
+          <!--
           <t>If the server responds with HTTP status code 503, the client must
           assume the token still exists and may retry after a reasonable
           delay. The server may include a "Retry-After" header in the response
           to indicate how long the service is expected to be unavailable to
           the requesting client.</t>
+          -->
+          <t>
+            サーバが HTTP ステータスコード 503 で応答した場合、クライアントはそのトークンがまだ存在しているとみなし、適切な遅延の後再び試してもよい。
+            サーバは、サービスがどのくらいの間リクエストしているクライアントが利用できないのか想定している時間を示す "Retry-After" ヘッダーを含んでもよい。
+          </t>
         </section>
       </section>
 
