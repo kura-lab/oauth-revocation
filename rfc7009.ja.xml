@@ -463,10 +463,16 @@
       </section>
 
       <section anchor="cross-orgin" title="Cross-Origin Support">
+        <!--
         <t>The revocation endpoint MAY support <xref format="title"
         target="W3C.WD-cors-20120403">Cross-Origin Resource Sharing(CORS)</xref> if it is aimed at use in
         combination with user-agent-based applications.</t>
+        -->
+        <t>
+          ユーザエージェントベースアプリケーションとの組み合わせで使用することを目的とする場合、無効化エンドポイントは <xref format="title" target="W3C.WD-cors-20120403">Cross-Origin Resource Sharing(CORS)</xref> をサポートしてもよい。（MAY）。
+        </t>
 
+        <!--
         <t>In addition, for interoperability with legacy user-agents, it MAY
         also offer <xref format="title" target="jsonp">JSONP</xref> by
         allowing GET requests with an additional parameter: <list
@@ -474,10 +480,22 @@
             <t hangText="callback">OPTIONAL. The qualified name of a
             JavaScript function.</t>
           </list></t>
+        -->
+        <t>
+          加えて、レガシーなユーザエージェントとの互換性のために、追加パラメータをつかった GET リクエストを許可することによって <xref format="title" target="jsonp">JSONP</xref> を提供してもよい（MAY）:
+          <list hangIndent="8" style="hanging">
+            <t hangText="callback">任意である（OPTIONAL）。JavaScript 関数の修飾名。</t>
+          </list>
+        </t>
 
+        <!--
         <t>For example, a client may request the revocation of an access token
         with the following request (line breaks are for display purposes
         only):</t>
+        -->
+        <t>
+          例えば、クライアントは以下のリクエスト（改行は表記のためである）でアクセストークンの無効化をリクエストしてもよい:
+        </t>
 
         <figure>
           <artwork><![CDATA[
@@ -502,9 +520,14 @@
 ]]></artwork>
         </figure>
 
+        <!--
         <t>Clients should be aware that when relying on JSONP, a malicious
         revocation endpoint may attempt to inject malicious code into the
         client.</t>
+        -->
+        <t>
+          クライアントは JSONP を信頼してるとき、悪意のある無効化エンドポイントがクライアントへの悪意あるコードの注入を試みるかもしれないということを認識すべきである。
+        </t>
       </section>
     </section>
 
