@@ -532,6 +532,7 @@
     </section>
 
     <section anchor="impl" title="Implementation Note">
+      <!--
       <t>OAuth 2.0 allows deployment flexibility with respect to the style of
       access tokens. The access tokens may be self-contained so that a
       resource server needs no further interaction with an authorization
@@ -542,7 +543,15 @@
       requires a resource server to issue a request to the respective
       authorization server to retrieve the content of the access token every
       time a client presents an access token.</t>
+      -->
+      <t>
+        OAuth 2.0 はアクセストークンの形式を考慮してデプロイの柔軟性を可能にする。
+        アクセストークンは、リソースサーバが保護されたリソースへのアクセスを要求するクライアントの認可の判定を行うためにトークンを発行している認可サーバーとそれ以上のインタラクションを必要としないように self-contained であってもよい。
+        システム設計は、しかしながら、認可サーバに保存されている認可情報を参照するハンドルであるアクセストークンを代わりに使用する。
+        この結果リソースサーバは、クライアントがアクセストークンを提供するたびにアクセストークンの内容を取り出すためそれぞれの認可サーバへのリクエストを発行する必要がある。
+      </t>
 
+      <!--
       <t>While these are not the only option, they illustrate the implications
       for revocation. In the latter case, the authorization server is able to
       revoke an access token previously issued to a client when the resource
@@ -554,12 +563,26 @@
       using the corresponding refresh tokens. This allows the authorization
       server to impose a limit on the time revoked when access tokens are in
       use.</t>
+      -->
+      <t>
+        これらは唯一の選択肢ではないが、それらは無効化の影響を説明する。
+        後者の場合、認可サーバは、リソースサーバが受け取ったアクセストークンを伝えるとき、クライアントに前もって発行されたアクセストークンの無効化を可能とする。
+        前者はの場合、即時のアクセストークンの無効化が望まれるとき、認可サーバとリソースサーバとの間でいくつかの（現在は標準化されていない）エンドポイントのインタラクションが使用されてもよい。
+        もう一つの設計の代替は短い有効期限のアクセストークンを発行することであり、それはいつでもリフレッシュトークンを通信することでリフレッシュできる。
+        これは、アクセストークンが使用中のときに認可サーバに無効化された時間の制限を課すことができる。
+      </t>
 
+      <!--
       <t>Which approach of token revocation is chosen will depend on the
       overall system design and on the application service provider's risk
       analysis. The cost of revocation in terms of required state and
       communication overhead is ultimately the result of the desired security
       properties.</t>
+      -->
+      <t>
+        選択されたどのトークン無効化の手法も全体のシステム設計とアプリケーションサーバの提供者のリスク分析に依存するだろう。
+        必要な状態での無効化のコストとコミュニケーションオーバーヘッドは最終的に必要なセキュリティプロパティの結果である。
+      </t>
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
