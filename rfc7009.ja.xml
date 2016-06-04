@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 		This template is for creating an Internet Draft using xml2rfc, which
 		is available here: http://xml.resource.org.
 	-->
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!-- One method to get references from the online citation libraries.
-     There has to be one entity for each item to be referenced. 
+     There has to be one entity for each item to be referenced.
      An alternate method (rfc include) is described in the references. -->
 <!ENTITY RFC2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC2629 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2629.xml">
@@ -197,7 +197,7 @@
       target="impl"/>).</t>
       -->
       <t>
-        実装はリフレッシュトークンの無効化はサポートしなければならなく（MUST）、アクセストークンの無効化はサポートすべきである（SHOULD）(<xref format="title" target="impl"/> を参照)。</t>
+        実装はリフレッシュトークンの無効化はサポートしなければならなく（MUST）、アクセストークンの無効化はサポートすべきである（SHOULD）(<xref format="title" target="impl"/> を参照)。
       </t>
 
       <!--
@@ -302,6 +302,7 @@
               </list>
               特定の実装、プロファイル、この仕様の拡張機能は <xref target="hint-reg"/> で定義されているレジストリを利用してこのパラメータの他の値を定義してもよい（MAY）。
             </t>
+          </list></t>
 
         <!--
         <t>The client also includes its authentication credentials as
@@ -325,7 +326,7 @@
   Host: server.example.com
   Content-Type: application/x-www-form-urlencoded
   Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-     
+
   token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token]]></artwork>
         </figure>
 
@@ -651,12 +652,19 @@
           <section title="Initial Registry Contents">
             <t>The OAuth Token Type Hint registry's initial contents are as follows.</t>
 
-             +---------------+-------------------+-----------+
-             |   Hint Value  | Change Controller | Reference |
-             +---------------+-------------------+-----------+
-             |  access_token |        IETF       | [RFC7009] |
-             | refresh_token |        IETF       | [RFC7009] |
-             +---------------+-------------------+-----------+
+            <texttable>
+              <ttcol align="center">Hint Value</ttcol>
+              <ttcol align="center">Change Controller</ttcol>
+              <ttcol align="center">Reference</ttcol>
+
+              <c>access_token</c>
+              <c>IETF</c>
+              <c>[RFC7009]</c>
+
+              <c>refresh_token</c>
+              <c>IETF</c>
+              <c>[RFC7009]</c>
+            </texttable>
 
             <t>Table 1: OAuth Token Type Hints initial registry contents</t>
 
