@@ -591,7 +591,7 @@
       <t>This specification registers an error value in the "OAuth Extensions
       Error Registry" and establishes the "OAuth Token Type Hints" registry.</t>
       -->
-      <t>この仕様は "OAuth Extensions Error Registry" にエラー値を登録され、 "OAuth Token Type Hints" レジストリを確立する。</t>
+      <t>この仕様は "OAuth Extensions Error Registry" にエラー値を登録し、 "OAuth Token Type Hints" レジストリを確立する。</t>
 
       <section title="OAuth Extensions Error Registration">
         <!--
@@ -652,7 +652,7 @@
                 used to indicate a certain token type to the authorization
                 server.</t>
                 -->
-                <t hangText="Hint Value:">追加の値、認可サーバーへ信頼のあるトークンタイプを指し示すために使用できる。</t>
+                <t hangText="Hint Value:">追加する値、認可サーバーへ信頼のあるトークンタイプを指し示すために使用できる。</t>
 
                 <!--
                 <t hangText="Change controller:">For Standards Track RFCs,
@@ -707,7 +707,7 @@
       refresh token is revoked. Deployments must take this into account when
       conducting their security risk analysis.</t>
       -->
-      <t>認可サーバーがアクセストークンの無効化をサポートしない場合、関連するリフレッシュトークンが無効化時にアクセストークンは直ちに無効化されないだろう。それらのセキュリティリスクの分析を行う際、配備はこのことを考慮しなければならない。</t>
+      <t>認可サーバーがアクセストークンの無効化をサポートしない場合、関連するリフレッシュトークンを無効化時してもアクセストークンは直ちに無効化されないであろう。それらのセキュリティリスクの分析を行う際、実装はこのことを考慮しなければならない。</t>
 
       <!--
       <t>Cleaning up tokens using revocation contributes to overall security
@@ -719,7 +719,7 @@
       target="RFC6749"/> and the OAuth threat model document <xref
       target="RFC6819"/>.</t>
       -->
-      <t>放棄されたトークンの乱用の可能性を低減させるため、無効化を使ったトークンの後始末は全般的なセキュリティとプライバシーに貢献する。一般的にこの仕様は、トークンの窃取と乱用に対する対策を提供するわけではない。それぞれの脅威と対策の議論について、 OAuth core specification <xref target="RFC6749"/> の Section 10 と OAuth threat model document <xref target="RFC6819"/> で与えられているセキュリティ考慮事項を参照すること。</t>
+      <t>トークンを適切に無効化すると、不要になったトークンの乱用の可能性を低減させ、全般的なセキュリティとプライバシーの向上につながる。一般的にこの仕様は、トークンの窃取と乱用に対する対策を提供するわけではない。それぞれの脅威と対策の議論について、 OAuth core specification <xref target="RFC6749"/> の Section 10 と OAuth threat model document <xref target="RFC6819"/> で与えられているセキュリティ考慮事項を参照すること。</t>
 
       <!--
       <t>Malicious clients could attempt to use the new endpoint to launch
@@ -731,7 +731,7 @@
       database lookups. Care MUST be taken to prevent malicious clients from
       exploiting this feature to launch denial-of-service attacks.</t>
       -->
-      <t>悪意のあるクライアントは認可サーバー上で DoS 攻撃を起動するために新規のエンドポイントを仕様する可能性がある。適切な対策は、同様にトークンエンドポイントと同じ場所にすべきであり、無効化エンドポイントに適用されなければいけない (<xref target="RFC6819"/> の Section 4.4.1.11 を参照) 。特に、無効なトークンタイプのヒントは認可サーバーを誤って案内するかもしれず、追加のデータベース検索を引き起こす。管理は悪意のあるクライアントが DoS 攻撃を起動するためにこの機能を使用ことを防がなければならない。</t>
+      <t>悪意のあるクライアントは認可サーバー上で DoS 攻撃を目的としてこの新しいエンドポイントを使用する可能性がある。DoS 攻撃に対する適切な対策 (これはトークンエンドポイントにも適用されるべき (SHOULD) であり) が、無効化エンドポイントに適用されなければいけない (MUST) (<xref target="RFC6819"/> の Section 4.4.1.11 を参照) 。特に、無効なトークンタイプのヒントは認可サーバーを誤認させ、余計なデータベース検索を引き起こす。悪意のあるクライアントが DoS 攻撃を起動するためにこの機能を使用することを防がなければならない。(MUST)</t>
 
       <!--
       <t>A malicious client may attempt to guess valid tokens on this endpoint
@@ -747,7 +747,7 @@
       grant and will need to prompt the user again. No further damage is done
       and the guessed token is now worthless.</t>
       -->
-      <t>悪意のあるクライアントは見込みのあるトークン文字列に対して無効化を要求することによってこのエンドポイントで有効なトークンを推測しようとするかもしれない。この仕様によると、公開されているクライアントの場合、クライアントは有効な client_id を、あるいは機密のクライアントの場合、有効なクライアントクレデンシャルを含まなければいけない。また、無効化されているトークンは要求しているクライアントに属していなければならない。攻撃者が公開されているクライアントの client_id とそれらのトークンのひとつ、あるいは非公開のクライアントクレデンシャルとそれらのトークンのひとつを正常に推測できる場合、トークンを無効化することより他の場所でトークンを使用することによってはるかに悪い損害を与える可能性がある。彼らがトークンを無効化する選択をする場合、正当なクライアントはその認可を失い、ユーザー認証を再び必要とするだろう。それ以上の損害は行われず、推測されたトークンはその時点で価値はない。</t>
+      <t>悪意のあるクライアントは任意のトークン文字列に対して無効化を要求することによって、このエンドポイントで有効なトークンを推測しようとするかもしれない。この仕様によると、パブリッククライアントの場合、クライアントは有効な client_id を、あるいはコンフィデンシャルクライアントの場合、有効なクライアントクレデンシャルを含まなければいけない。また、無効化されているトークンは要求しているクライアントに属していなければならない。攻撃者が公開されているクライアントの client_id とそれらのトークンのひとつ、あるいは非公開のクライアントクレデンシャルとそれらのトークンのひとつを正常に推測できる場合、トークンを無効化することより他の場所でトークンを使用することによってはるかに悪い損害を与える可能性がある。彼らがトークンを無効化する選択をする場合、正当なクライアントはその認可を失い、ユーザー認証を再び必要とするだろう。それ以上の損害は行われず、推測されたトークンはその時点で価値はない。</t>
 
       <!--
       <t>Since the revocation endpoint is handling security credentials,
