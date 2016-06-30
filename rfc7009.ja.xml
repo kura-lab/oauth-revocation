@@ -707,7 +707,7 @@
       refresh token is revoked. Deployments must take this into account when
       conducting their security risk analysis.</t>
       -->
-      <t>認可サーバーがアクセストークンの無効化をサポートしない場合、関連するリフレッシュトークンを無効化時してもアクセストークンは直ちに無効化されないであろう。それらのセキュリティリスクの分析を行う際、実装はこのことを考慮しなければならない。</t>
+      <t>認可サーバーがアクセストークンの無効化をサポートしない場合、関連するリフレッシュトークンを無効化してもアクセストークンは直ちに無効化されないであろう。それらのセキュリティリスクの分析を行う際、実装はこのことを考慮しなければならない。</t>
 
       <!--
       <t>Cleaning up tokens using revocation contributes to overall security
